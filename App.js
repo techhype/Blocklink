@@ -7,10 +7,18 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 const AppNavigator = createStackNavigator(
   {
-    Home: HomeScreen,
+    Home: {
+      screen:HomeScreen,
+      header: null,
+    },
     Login: LoginScreen,
     SignUp: SignUpScreen,
-    Welcome: WelcomeScreen,
+    Welcome: {
+      screen:WelcomeScreen,
+      navigationOptions:{
+        headerShown:false,
+      }
+    }
   },
   {
     initialRouteName: 'Welcome',

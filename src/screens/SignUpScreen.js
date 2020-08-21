@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { StyleSheet, Text, TextInput, Button, View, TouchableHighlight } from 'react-native';
+import moveToBottom from '../../library/utils/moveToBottom';
 
 const signUp = () => {
     return (
@@ -22,34 +23,48 @@ const SignUp = ({ navigation }) => {
                 <TextInput placeholder="Mobile Number" style={styles.inputStyle} />
                 {/*  Component Inheritance Not working */}
                 {/* <signUp /> */}
-                <TouchableHighlight onPress={() => navigation.navigate('Home')}>
-                    <View style={styles.button}>
-                        <Text style={{ color: 'white', fontSize: 22 }}>Sign Up</Text>
-                    </View>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={() => navigation.navigate('Login')}>
-                    <View style={[styles.button, { backgroundColor: "#293448", borderColor: "#293448" }]}>
-                        <Text style={{ color: 'white', fontSize: 22 }}>Have Account?</Text>
-                    </View>
-                </TouchableHighlight>
+                {
+                    moveToBottom(
+                        <Fragment>
+                            <TouchableHighlight onPress={() => navigation.navigate('Home')}>
+                                <View style={styles.button}>
+                                    <Text style={{ color: 'white', fontSize: 22, fontFamily: 'Inter Medium' }}>Sign Up</Text>
+                                </View>
+                            </TouchableHighlight>
+                            <TouchableHighlight onPress={() => navigation.navigate('Login')}>
+                                <View style={[styles.button, { backgroundColor: "#293448", borderColor: "#293448" }]}>
+                                    <Text style={{ color: 'white', fontSize: 22, fontFamily: 'Inter Medium' }}>Have Account?</Text>
+                                </View>
+                            </TouchableHighlight>
+                        </Fragment>
+                    )
+                }
             </View>
         </View>
     );
 }
 
+const check = {
+    isAndroid: () => {
+        return Platform.OS == 'android'
+    }
+}
+
 const styles = StyleSheet.create({
     container: {
-
+        marginTop: 25,
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
         height: 50,
+        paddingBottom: check.isAndroid ? 16 : 0,
     },
     inputStyle: {
         margin: 20,
-        width: 200,
-        height: 30,
+        width: 300,
+        height: 40,
+        paddingLeft: 10,
         paddingHorizontal: 10,
         borderRadius: 5,
         borderWidth: 1,
@@ -62,9 +77,8 @@ const styles = StyleSheet.create({
         color: '#fff',
         alignItems: "center",
         backgroundColor: "#176CDC",
-        width: 300,
-        height:50,
-        marginLeft: 20,
+        width: 355,
+        height:52,
         marginTop: 10,
         padding: 10,
         // Shadow  
