@@ -1,16 +1,45 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Text,TextInput, View, TouchableHighlight,StyleSheet } from 'react-native';
 import moveToBottom from '../../library/utils/moveToBottom';
 
 const LoginScreen = ({ navigation }) => {
-    return (
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+    
+  // sends Credentials to Backend (Node.js) 
+  sendCredentials = ()=>{
+  // Need to start Ngrok to access Backend from React Native
+  //use to access Backend from the LOCALHOST for Development
+  fetch('http://44b225591e06.ngrok.io/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+	}  
+  return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Text>Login Screen</Text>
-        <TextInput placeholder="Email" style={styles.inputStyle} />
-        <TextInput placeholder="Password" secureTextEntry={true} style={styles.inputStyle} />
+        <TextInput 
+          placeholder="Email" 
+          style={styles.inputStyle}
+          value={email}
+          onChangeText={(text)=>setEmail(text)} />
+        <TextInput 
+          placeholder="Password" 
+          secureTextEntry={true} 
+          style={styles.inputStyle}
+          value= {password}
+          onChangeText= {(text)=>setPassword(text)} />
         {
           moveToBottom(
-            <TouchableHighlight onPress={() => navigation.navigate('Login')}>
+            <TouchableHighlight onPress={() => sendCredentials()}>
               <View style={[styles.button, { backgroundColor: "#293448", borderColor: "#293448" }]}>
                 <Text style={{ color: 'white', fontSize: 22, fontFamily: 'Inter Medium' }}>Sign In</Text>
               </View>

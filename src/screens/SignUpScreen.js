@@ -23,21 +23,20 @@ const SignUp = ({ navigation }) => {
 	sendCredentials = ()=>{
 		// Need to start Ngrok to access Backend from React Native
 		//use to access Backend from the LOCALHOST for Development
-		fetch("http://14cd9722c5cd.ngrok.io/signup",{
-			method:'POST',
-			headers:{
-				'Content-Type': 'application/json'
-			},
-			body:JSON.stringify({
-				"username": username,
-				"email": email,
-				"password": password,
-				"mnumber": mnumber
-			})	
-		})
-		.then(res => res.json())
-		.then(data=>
-				console.log(data))
+		fetch('http://44b225591e06.ngrok.io/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: password,
+        mnumber: mnumber,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
 	}
 	return (
 		<View style={styles.container}>
