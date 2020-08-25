@@ -27,10 +27,12 @@ const LoginScreen = ({ navigation }) => {
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Text>Login Screen</Text>
         <TextInput 
-          placeholder="Email" 
+          placeholder='Email' 
+          keyboardType= 'email-address'
           style={styles.inputStyle}
           value={email}
-          onChangeText={(text)=>setEmail(text)} />
+          onChangeText={(text)=>setEmail(text)}
+          autoCapitalize= 'none' />
         <TextInput 
           placeholder="Password" 
           secureTextEntry={true} 

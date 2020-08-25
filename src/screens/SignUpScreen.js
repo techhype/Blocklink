@@ -46,12 +46,15 @@ const SignUp = ({ navigation }) => {
 					placeholder="User Name" 
 					style={styles.inputStyle}
 					value={username}
-					onChangeText={ (text)=>setUsername(text) } />
+					onChangeText={ (text)=>setUsername(text) }
+					autoCapitalize= 'none' />
 				<TextInput 
 					placeholder="Email" 
+					keyboardType= 'email-address'
 					style={styles.inputStyle}
 					value= {email}
-					onChangeText={ (text)=>setEmail(text) } />
+					onChangeText={ (text)=>setEmail(text) }
+					autoCapitalize= 'none' />
 				<TextInput 
 					placeholder="Password" 
 					style={styles.inputStyle} 
@@ -60,6 +63,7 @@ const SignUp = ({ navigation }) => {
 					onChangeText={ (text)=>setPassword(text) } />
 				<TextInput 
 					placeholder="Mobile Number" 
+					keyboardType= "number-pad"
 					style={styles.inputStyle}
 					value= {mnumber}
 					onChangeText={ (text)=>setMnumber(text) } />
