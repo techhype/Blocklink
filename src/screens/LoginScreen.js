@@ -39,15 +39,15 @@ const LoginScreen = ({ navigation }) => {
           style={styles.inputStyle}
           value= {password}
           onChangeText= {(text)=>setPassword(text)} />
-        {
-          moveToBottom(
+        {/* {
+          moveToBottom( */}
             <TouchableHighlight onPress={() => sendCredentials()}>
               <View style={[styles.button, { backgroundColor: "#293448", borderColor: "#293448" }]}>
                 <Text style={{ color: 'white', fontSize: 22, fontFamily: 'Inter Medium' }}>Sign In</Text>
               </View>
             </TouchableHighlight>
-          )
-        }
+          {/* )
+        } */}
         </View>
     );
 }

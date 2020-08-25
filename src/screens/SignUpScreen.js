@@ -1,17 +1,9 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, Component } from 'react';
 import { StyleSheet, Text, TextInput, Button, View, TouchableHighlight } from 'react-native';
-import moveToBottom from '../../library/utils/moveToBottom';
-import { set } from 'react-native-reanimated';
+// import moveToBottom from '../../library/utils/moveToBottom';
+// import { set } from 'react-native-reanimated';
+import FloatingLabelInput from '../../library/utils/FloatingLabelInput';
 
-const signUp = () => {
-	return (
-		<TouchableHighlight>
-			<View style={styles.button}>
-					<Text style={{ color: 'white', fontSize: 14 }}>Sign Up</Text>
-			</View>
-		</TouchableHighlight>
-	);
-};
 
 const SignUp = ({ navigation }) => {
 	const [username,setUsername] = useState('');
@@ -42,35 +34,31 @@ const SignUp = ({ navigation }) => {
 		<View style={styles.container}>
 			<Text>Demo form</Text>
 			<View >
-				<TextInput 
-					placeholder="User Name" 
-					style={styles.inputStyle}
+				<FloatingLabelInput 
+					label='Username'
 					value={username}
 					onChangeText={ (text)=>setUsername(text) }
 					autoCapitalize= 'none' />
-				<TextInput 
-					placeholder="Email" 
+				<FloatingLabelInput 
+					label='Email'
 					keyboardType= 'email-address'
-					style={styles.inputStyle}
 					value= {email}
 					onChangeText={ (text)=>setEmail(text) }
 					autoCapitalize= 'none' />
-				<TextInput 
-					placeholder="Password" 
-					style={styles.inputStyle} 
+				<FloatingLabelInput 
+					label='Password'
 					secureTextEntry={true}
 					value= {password}
 					onChangeText={ (text)=>setPassword(text) } />
-				<TextInput 
-					placeholder="Mobile Number" 
+				<FloatingLabelInput 
+					label='Mobile Number'
 					keyboardType= "number-pad"
-					style={styles.inputStyle}
 					value= {mnumber}
 					onChangeText={ (text)=>setMnumber(text) } />
 				{/*  Component Inheritance Not working */}
 				{/* <signUp /> */}
-				{
-					moveToBottom(
+				{/* {
+					moveToBottom( */}
 							<Fragment>
 									<TouchableHighlight onPress={() => sendCredentials()}>
 										<View style={styles.button}>
@@ -87,10 +75,11 @@ const SignUp = ({ navigation }) => {
 										</View>
 									</TouchableHighlight>
 							</Fragment>
-					)
-				}
+					{/* )
+				} */}
 			</View>
 		</View>
+		
 	);
 }
 
@@ -102,12 +91,11 @@ const check = {
 
 const styles = StyleSheet.create({
 	container: {
-			marginTop: 25,
 			flex: 1,
+			padding:30,
 			backgroundColor: '#fff',
-			alignItems: 'center',
-			justifyContent: 'center',
-			height: 50,
+			// alignItems: 'center',
+			// justifyContent: 'center',
 			paddingBottom: check.isAndroid ? 16 : 0,
 	},
 	inputStyle: {
