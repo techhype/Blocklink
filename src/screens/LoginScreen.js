@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Text,TextInput, View, TouchableHighlight,StyleSheet } from 'react-native';
 import moveToBottom from '../../library/utils/moveToBottom';
+import AsyncStorage from '@react-native-community/async-storage';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({route, navigation }) => {
+  const {routedEmail} = route.params;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
     
@@ -10,49 +13,70 @@ const LoginScreen = ({ navigation }) => {
   sendCredentials = ()=>{
   // Need to start Ngrok to access Backend from React Native
   //use to access Backend from the LOCALHOST for Development
-    fetch('http://30ef60e0a4fd.ngrok.io/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      navigation.navigate('Home');
-    });
-	}  
+    fetch('http://4ba88836a22c.ngrok.io/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        try {
+          await AsyncStorage.setItem('token',data.token)
+          console.log(data);
+          navigation.replace("Home")
+        } catch (e) {
+          console.log("error:",e)
+          // Alert(e)
+        }
+      });
+  } 
+  
+  useEffect(()=> {
+    if(routedEmail){
+      setEmail(routedEmail);
+    }
+  });
   return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Login Screen</Text>
-        <TextInput 
-          placeholder='Email' 
-          keyboardType= 'email-address'
-          style={styles.inputStyle}
-          value={email}
-          onChangeText={(text)=>setEmail(text)}
-          autoCapitalize= 'none' />
-        <TextInput 
-          placeholder="Password" 
-          secureTextEntry={true} 
-          style={styles.inputStyle}
-          value= {password}
-          onChangeText= {(text)=>setPassword(text)} />
-        {/* {
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Login Screen</Text>
+      <TextInput
+        placeholder="Email"
+        keyboardType="email-address"
+        style={styles.inputStyle}
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+        autoCapitalize="none"
+      />
+      <TextInput
+        placeholder="Password"
+        secureTextEntry={true}
+        style={styles.inputStyle}
+        value={password}
+        onChangeText={(text) => setPassword(text)}
+      />
+      {/* {
           moveToBottom( */}
-            <TouchableHighlight onPress={() => sendCredentials()}>
-              <View style={[styles.button, { backgroundColor: "#293448", borderColor: "#293448" }]}>
-                <Text style={{ color: 'white', fontSize: 22, fontFamily: 'Inter Medium' }}>Sign In</Text>
-              </View>
-            </TouchableHighlight>
-          {/* )
-        } */}
+      <TouchableHighlight onPress={() => sendCredentials()}>
+        <View
+          style={[
+            styles.button,
+            {backgroundColor: '#293448', borderColor: '#293448'},
+          ]}>
+          <Text
+            style={{color: 'white', fontSize: 22, fontFamily: 'Inter Medium'}}>
+            Sign In
+          </Text>
         </View>
-    );
+      </TouchableHighlight>
+      {/* )
+        } */}
+    </View>
+  );
 }
 
 const check = {
