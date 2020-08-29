@@ -15,7 +15,7 @@ const SignUp = ({ navigation }) => {
 	sendCredentials = ()=>{
 		// Need to start Ngrok to access Backend from React Native
 		//use to access Backend from the LOCALHOST for Development
-		fetch('http://44b225591e06.ngrok.io/signup', {
+		fetch('http://30ef60e0a4fd.ngrok.io/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,7 +28,10 @@ const SignUp = ({ navigation }) => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+			.then((data) => {
+				console.log(data);
+				navigation.navigate('Login');
+			});
 	}
 	return (
 		<View style={styles.container}>
