@@ -13,7 +13,7 @@ const LoginScreen = ({route, navigation }) => {
   sendCredentials = ()=>{
   // Need to start Ngrok to access Backend from React Native
   //use to access Backend from the LOCALHOST for Development
-    fetch('http://4ba88836a22c.ngrok.io/login', {
+    fetch('http://6f41d05cf2ed.ngrok.io/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
