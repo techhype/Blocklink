@@ -26,7 +26,7 @@ const Tab = createBottomTabNavigator();
 export default function HomeScreen() {
   return (
     <Tab.Navigator
-      initialRouteName="Dashboard"
+      initialRouteName="Home"
       tabBarOptions={{activeTintColor: '#0c6df2'}}>
       <Tab.Screen
         name="Send"

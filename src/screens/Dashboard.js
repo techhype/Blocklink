@@ -71,8 +71,10 @@ const HomeScreen = ({ navigation }) => {
                             />
                             <Text style={{ fontSize: 20, marginLeft: 15,fontSize: 25, fontFamily: 'Inter'}}>{localState.name}</Text>
                         </View>
-                        <Text style={{ marginLeft: 44,marginBottom: 5, fontFamily: 'Inter'}}>{localState.price}</Text>
-                        <Text style={[localState.change>0 ? styles.increase : styles.decrease,{ marginLeft: 44,marginBottom: 5, fontFamily: 'Inter'}]}>{localState.change}%</Text>
+                        <Text style={{ marginLeft: 44,marginBottom: 5, fontSize:19, fontFamily: 'Inter'}}>{localState.price}</Text>
+                        <Text style={{ marginLeft: 44,marginBottom: 5, fontFamily: 'Inter',color: 'black'}}>
+                        <Text style={localState.change>0 ? styles.increase : styles.decrease}>{localState.change}% </Text>
+                        24hrs</Text>
                     </View>
                 </Card>
             ))}
