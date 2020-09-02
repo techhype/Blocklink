@@ -73,7 +73,7 @@ const HomeScreen = ({ navigation }) => {
                         </View>
                         <Text style={{ marginLeft: 44,marginBottom: 5, fontSize:19, fontFamily: 'Inter'}}>{localState.price}</Text>
                         <Text style={{ marginLeft: 44,marginBottom: 5, fontFamily: 'Inter',color: 'black'}}>
-                        <Text style={localState.change>0 ? styles.increase : styles.decrease}>{localState.change}% </Text>
+                        <Text style={localState.change>0 ? styles.increase : styles.decrease}>{localState.change}%   </Text>
                         24hrs</Text>
                     </View>
                 </Card>
