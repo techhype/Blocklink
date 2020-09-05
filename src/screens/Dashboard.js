@@ -12,7 +12,10 @@ const HomeScreen = ({ navigation }) => {
     
     
     useEffect(() => {
-        fetch("https://api.coinranking.com/v1/public/coins?ids=1,2,3")
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+
+        fetch("https://api.coinranking.com/v1/public/coins?ids=1,2,3",{signal:signal})
         .then((response) => response.json())
         .then((json) => {
             let coinData= [];
@@ -25,6 +28,10 @@ const HomeScreen = ({ navigation }) => {
             setStateValues(coinData);
         })
         .catch((error) => console.error(error));
+
+        return function cleanup(){
+            abortController.abort();
+        }
     },[]);
     
     const wait = (timeout) => {
@@ -79,7 +86,6 @@ const HomeScreen = ({ navigation }) => {
                 </Card>
             ))}
             
-            <Button title='Log out' onPress={() => navigation.navigate('Login')} />
         </ScrollView>
     );
 }

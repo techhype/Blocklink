@@ -2,18 +2,22 @@ import React, {useState, useEffect} from 'react';
 import { Text,TextInput, View, TouchableHighlight,StyleSheet } from 'react-native';
 import moveToBottom from '../../library/utils/moveToBottom';
 import AsyncStorage from '@react-native-community/async-storage';
+import SplashScreen from './SplashScreen';
+
 
 const LoginScreen = ({route, navigation }) => {
-  const {routedEmail} = route.params;
+  const {routedEmail} = route.params || '';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-    
+
+
+
   // sends Credentials to Backend (Node.js) 
   sendCredentials = ()=>{
   // Need to start Ngrok to access Backend from React Native
   //use to access Backend from the LOCALHOST for Development
-    fetch('http://6f41d05cf2ed.ngrok.io/login', {
+    fetch('http://f1ce1ea4051e.ngrok.io/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,11 +30,13 @@ const LoginScreen = ({route, navigation }) => {
       .then((res) => res.json())
       .then(async (data) => {
         try {
-          await AsyncStorage.setItem('token',data.token)
+          await AsyncStorage.setItem('token', data.token);
           console.log(data);
-          navigation.replace("Home")
+          
+
+          
         } catch (e) {
-          console.log("error:",e)
+          console.log('error:', e);
           // Alert(e)
         }
       });
@@ -41,6 +47,8 @@ const LoginScreen = ({route, navigation }) => {
       setEmail(routedEmail);
     }
   });
+
+
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>Login Screen</Text>

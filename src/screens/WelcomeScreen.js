@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Text, View, TouchableHighlight, Image,StyleSheet,Platform } from 'react-native';
 import moveToBottom from '../../library/utils/moveToBottom';
 
-const HomeScreen = ({ navigation }) => {
+const WelcomeScreen = ({ navigation }) => {
     return (
         
         <View style={styles.container}>
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
         elevation: 4,
     }
 })
-export default HomeScreen;
+export default WelcomeScreen;
